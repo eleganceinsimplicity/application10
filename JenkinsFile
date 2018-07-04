@@ -1,8 +1,12 @@
 node {
+    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: '/mnt/c/projects/application10']]])
+
     stage('Build') {
             echo 'Building..'
             echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            sh 'mvn dependency:tree'
+            git '/mnt/c/projects/application10'
+            sh 'mvn --version'
+            sh 'java -version'
     }
     stage('Test'){
         steps {
