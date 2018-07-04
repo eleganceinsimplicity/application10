@@ -15,6 +15,7 @@ node {
                 sh "echo 'Running ${env.BUILD_ID} on ${env.JENKINS_URL}'"
                 sh 'java -version'
                 sh 'mvn --version'
+                sh 'mvn clean package'
             } catch(exc){
                 echo 'Something failed. try again'
                 throw exc
