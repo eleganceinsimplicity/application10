@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Application10
+server:
+  address: localhost
+  port: 12000
