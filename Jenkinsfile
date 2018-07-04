@@ -26,14 +26,15 @@ node {
 
                 def uploadSpec = """{
                   "files": [
+                      {
+                        "pattern": "${env.WORKSPACE}/*.pom",
+                        "target": "example-repo-local/"
+                      },
                     {
                       "pattern": "${env.WORKSPACE}/target/*.jar",
                       "target": "example-repo-local/"
-                    },
-                    {
-                      "pattern": "${env.WORKSPACE}/*.pom",
-                      "target": "example-repo-local/"
                     }
+
                  ]
                 }"""
 
@@ -44,12 +45,12 @@ node {
 
                 rtMaven.resolver server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
                 // Optionally include or exclude artifacts to be deployed to Artifactory:
-                rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.pom,*.jar").addExclude("*.zip")
+                rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.pom,*.jar")
 
                 // Optionally set Maven Ops
                 rtMaven.opts = '-Xms1024m -Xmx4096m'
                 // Run Maven:
-                def buildInfoData = rtMaven.run pom: 'pom.xml', goals: 'clean install'
+                def buildInfoData = rtMaven.run pom: 'pom.xml', goals: 'clean package deploy'
 
                 server.publishBuildInfo(buildInfoData)
 
