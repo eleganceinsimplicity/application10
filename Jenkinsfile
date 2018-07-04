@@ -18,7 +18,7 @@ node {
                 sh 'java -version'
                 sh 'mvn --version'
 
-                def server = Artifactory.newServer url: 'http://artifactory.localhost.com', credentialsId: 'jfrog-artifactory'
+                def server = Artifactory.newServer url: 'http://artifactory.localhost.com/artifactory', credentialsId: 'jfrog-artifactory'
 
                 def uploadSpec = """{
                   "files": [
