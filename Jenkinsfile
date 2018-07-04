@@ -11,9 +11,10 @@ node {
 
     stage('Build') {
             try {
-                echo 'Building..'
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                sh 'echo "Building.."'
+                sh "echo 'Running ${env.BUILD_ID} on ${env.JENKINS_URL}'"
                 sh 'java -version'
+                sh 'mvn --version'
             } catch(exc){
                 echo 'Something failed. try again'
                 throw exc
