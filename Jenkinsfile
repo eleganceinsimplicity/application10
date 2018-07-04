@@ -16,7 +16,7 @@ node {
                 sh 'java -version'
             } catch(exc){
                 echo 'Something failed. try again'
-                throw
+                throw exc
             }
     }
 }
