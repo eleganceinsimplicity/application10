@@ -11,6 +11,9 @@ node {
     // Create and set an Artifactory Maven Build instance:
      def rtMaven = Artifactory.newMavenBuild()
 
+     // Set a Maven Tool defined in Jenkins "Manage":
+     rtMaven.tool = "MAVEN3"
+
 
     stage('Build') {
             try {
@@ -42,8 +45,7 @@ node {
                 rtMaven.resolver server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
                 // Optionally include or exclude artifacts to be deployed to Artifactory:
                 rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.pom,*.jar").addExclude("*.zip")
-                // Set a Maven Tool defined in Jenkins "Manage":
-                rtMaven.tool = MAVEN_TOOL
+
                 // Optionally set Maven Ops
                 rtMaven.opts = '-Xms1024m -Xmx4096m'
                 // Run Maven:
