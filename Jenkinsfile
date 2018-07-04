@@ -47,7 +47,7 @@ node {
                  ]
                 }"""
 
-                def buildInfoUploadDownloadSpec = server.download(buildInfoUploadDownloadSpec)
+                def buildInfoUploadDownloadSpec = server.download(downloadSpec)
                 def buildInfoUploadSpec = server.upload(uploadSpec)
                 buildInfoUploadDownloadSpec.append(buildInfoUploadSpec)
                 server.publishBuildInfo(buildInfoUploadDownloadSpec)
