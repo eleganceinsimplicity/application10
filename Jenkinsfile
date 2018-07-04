@@ -50,7 +50,7 @@ node {
                 // Optionally set Maven Ops
                 rtMaven.opts = '-Xms1024m -Xmx4096m'
                 // Run Maven:
-                def buildInfo = rtMaven.run pom: 'application10/pom.xml', goals: 'clean install', buildInfo: buildInfo
+                rtMaven.run pom: 'application10/pom.xml', goals: 'clean install', buildInfo: buildInfo
 
                 server.publishBuildInfo(buildInfo)
 
