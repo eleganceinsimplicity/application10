@@ -14,7 +14,6 @@ node {
                 echo 'Building..'
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 sh 'java -version'
-                sh 'build.sh'
             } catch(exc){
                 echo 'Something failed. try again'
                 throw
