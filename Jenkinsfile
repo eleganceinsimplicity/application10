@@ -24,6 +24,15 @@ node {
 
                 def server = Artifactory.newServer url: 'http://artifactory.localhost.com/artifactory', credentialsId: 'jfrog-artifactory'
 
+                def downloadSpec = """{
+                 "files": [
+                  {
+                      "pattern": "**/*",
+                      "target": "target/"
+                    }
+                 ]
+                }"""
+
                 def uploadSpec = """{
                   "files": [
                       {
@@ -38,8 +47,10 @@ node {
                  ]
                 }"""
 
-                def buildInfoUpload = server.upload(uploadSpec)
-                server.publishBuildInfo(buildInfoUpload)
+                def buildInfoUploadDownloadSpec = server.download(buildInfoUploadDownloadSpec)
+                def buildInfoUploadSpec = server.upload(uploadSpec)
+                buildInfoUploadDownloadSpec.append(buildInfoUploadSpec)
+                server.publishBuildInfo(buildInfoUploadDownloadSpec)
 
 
 
