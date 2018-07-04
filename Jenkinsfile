@@ -8,7 +8,8 @@ node {
         userRemoteConfigs: [[credentialsId: 'GitHub-simplelife1', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/simplelife1/application10.git']]
         ])
 
-
+    // Create and set an Artifactory Maven Build instance:
+     def rtMaven = Artifactory.newMavenBuild()
 
 
     stage('Build') {
@@ -37,8 +38,7 @@ node {
                 server.publishBuildInfo(buildInfoUpload)
 
 
-                // Create and set an Artifactory Maven Build instance:
-                def rtMaven = Artifactory.newMavenBuild()
+
                 rtMaven.resolver server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
                 // Optionally include or exclude artifacts to be deployed to Artifactory:
                 rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.pom,*.jar").addExclude("*.zip")
