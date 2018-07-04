@@ -34,10 +34,7 @@ node {
                 }"""
 
                 def buildInfoUpload = server.upload(uploadSpec)
-
-                def buildInfo = Artifactory.newBuildInfo()
-                buildInfo.env.capture = true
-                server.upload(buildInfoUpload,buildInfo)
+                server.publishBuildInfo(buildInfoUpload)
 
 
                 // Create and set an Artifactory Maven Build instance:
@@ -50,9 +47,10 @@ node {
                 // Optionally set Maven Ops
                 rtMaven.opts = '-Xms1024m -Xmx4096m'
                 // Run Maven:
-                rtMaven.run pom: 'application10/pom.xml', goals: 'clean install', buildInfo: buildInfo
+                def buildInfoData = rtMaven.run pom: 'application10/pom.xml', goals: 'clean install'
 
-                server.publishBuildInfo(buildInfo)
+                server.publishBuildInfo(buildInfoData)
+
 
             } catch(exc){
                 echo 'Something failed. try again'
