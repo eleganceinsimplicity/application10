@@ -31,7 +31,7 @@ node {
                       "target": "example-repo-local/"
                     },
                     {
-                      "pattern": "${env.WORKSPACE}/target/*.pom",
+                      "pattern": "${env.WORKSPACE}/*.pom",
                       "target": "example-repo-local/"
                     }
                  ]
