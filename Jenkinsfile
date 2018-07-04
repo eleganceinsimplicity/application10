@@ -52,9 +52,11 @@ node {
                 buildInfoUploadDownloadSpec.append(buildInfoUploadSpec)
                 server.publishBuildInfo(buildInfoUploadDownloadSpec)
 
+                rtMaven.resolver server: server, releaseRepo: 'pom-local', snapshotRepo: 'pom-local'
+                rtMaven.deployer server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
 
+                // rtMaven.resolver server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
 
-                rtMaven.resolver server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
                 // Optionally include or exclude artifacts to be deployed to Artifactory:
                 rtMaven.deployer.artifactDeploymentPatterns.addInclude("*.pom,*.jar")
 
