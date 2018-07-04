@@ -47,10 +47,13 @@ node {
                  ]
                 }"""
 
-                def buildInfoUploadDownloadSpec = server.download(downloadSpec)
-                def buildInfoUploadSpec = server.upload(uploadSpec)
-                buildInfoUploadDownloadSpec.append(buildInfoUploadSpec)
-                server.publishBuildInfo(buildInfoUploadDownloadSpec)
+                // def buildInfoUploadDownloadSpec = server.download(downloadSpec)
+                // def buildInfoUploadSpec = server.upload(uploadSpec)
+                // buildInfoUploadDownloadSpec.append(buildInfoUploadSpec)
+                // server.publishBuildInfo(buildInfoUploadDownloadSpec)
+
+                server.download(downloadSpec)
+                server.upload(uploadSpec)
 
                 // rtMaven.resolver server: server, releaseRepo: 'pom-local', snapshotRepo: 'pom-local'
                 rtMaven.deployer server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
