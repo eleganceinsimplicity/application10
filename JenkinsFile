@@ -1,24 +1,22 @@
 node {
     checkout([
         $class: 'GitSCM',
-        branches: [[name: '*/master']],
+        branches: [[name: 'master']],
         doGenerateSubmoduleConfigurations: false,
         extensions: [],
         submoduleCfg: [],
-        userRemoteConfigs: [[url: '/mnt/c/projects/application10']]
+        userRemoteConfigs: [[credentialsId: 'GitHub-simplelife1', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/simplelife1/application10.git']]
         ])
 
-    stage('Build') {
-            echo 'Building..'
-            echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            git '/mnt/c/projects/application10'
-            sh 'mvn --version'
-            sh 'java -version'
-    }
-    stage('Test'){
-        steps {
-            echo 'Testing..'
-        }
-    }
 
+    stage('Build') {
+            try {
+                echo 'Building..'
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                sh 'java -version'
+            } catch(exc){
+                echo 'Something failed. try again'
+                throw
+            }
+    }
 }
