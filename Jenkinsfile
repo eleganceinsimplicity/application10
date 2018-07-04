@@ -52,7 +52,7 @@ node {
                 buildInfoUploadDownloadSpec.append(buildInfoUploadSpec)
                 server.publishBuildInfo(buildInfoUploadDownloadSpec)
 
-                #rtMaven.resolver server: server, releaseRepo: 'pom-local', snapshotRepo: 'pom-local'
+                // rtMaven.resolver server: server, releaseRepo: 'pom-local', snapshotRepo: 'pom-local'
                 rtMaven.deployer server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
 
                 // rtMaven.resolver server: server, releaseRepo: 'example-repo-local', snapshotRepo: 'example-repo-local'
